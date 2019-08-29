@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 html,body,ul,input{
   margin: 0;
   padding: 0;

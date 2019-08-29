@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import index from '@/pages/index'
 import data from '@/pages/data'
 import postDetail from '@/pages/postDetail'
+import card from '@/components/card'
 
 Vue.use(Router)
 
@@ -20,6 +21,10 @@ export default new Router({
       path: '/postDetail',
       name: '帖子详情页',
       component: postDetail
+    }, {
+      path: '/card',
+      name: '卡片',
+      component: card
     }
   ]
 })
