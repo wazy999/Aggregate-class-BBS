@@ -4,7 +4,7 @@
     <forum-header :pageName = "title"></forum-header>
     <!-- 页面主要内容 -->
     <div class="post-detail">
-        <span>李树霖同学</span>
+        <span>李树霖</span>
     </div>
   </div>
 </template>
