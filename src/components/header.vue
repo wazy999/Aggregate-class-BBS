@@ -18,7 +18,9 @@ export default {
 
 <style lang="scss">
 .project-header{
-    position: fixed;
+    float: left;
+    position: relative;
+    //position: fixed;
     top: 0;
     left: 0;
     width:100%;
