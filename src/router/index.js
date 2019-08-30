@@ -5,6 +5,8 @@ import data from '@/pages/data'
 import postDetail from '@/pages/postDetail'
 import card from '@/components/card'
 import keyWord from '@/components/keyWord'
+import discuss from '@/pages/discuss'
+import content from '@/components/content'
 
 Vue.use(Router)
 
@@ -30,6 +32,14 @@ export default new Router({
       path: '/keyWord',
       name: '组件',
       component: keyWord
+    }, {
+      path: '/discuss',
+      name: '评论展示',
+      component: discuss
+    }, {
+      path: '/content',
+      name: '帖子内容',
+      component: content
     }
   ]
 })

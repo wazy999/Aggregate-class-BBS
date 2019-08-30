@@ -131,20 +131,6 @@ export default {
         top: 0;
         left: 0.32rem;
      }
-    //搜索按钮
-    input{
-        outline: none;
-        border: none;
-        padding: 0.16rem 0.32rem 0.16rem 0.4rem;
-        background-color: rgba(94,50,119,.03);
-        border-radius: 0.3rem;
-        width: 100%;
-        box-sizing: border-box;
-        color: #6ca8c2;
-        &::-webkit-input-placeholder{
-            color:#6ca8c2;
-        }
-    }
   }
 }
 </style>
