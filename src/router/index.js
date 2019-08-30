@@ -4,6 +4,7 @@ import index from '@/pages/index'
 import data from '@/pages/data'
 import postDetail from '@/pages/postDetail'
 import card from '@/components/card'
+import keyWord from '@/components/keyWord'
 
 Vue.use(Router)
 
@@ -25,6 +26,10 @@ export default new Router({
       path: '/card',
       name: '卡片',
       component: card
+    }, {
+      path: '/keyWord',
+      name: '组件',
+      component: keyWord
     }
   ]
 })

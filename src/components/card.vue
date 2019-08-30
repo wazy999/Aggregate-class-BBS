@@ -1,40 +1,59 @@
 <template>
-  <div class="data-card">
-    <div class="card-border">
-        <div class="circle-label">
-            <span>36次浏览</span>
-            <span>6320个讨论</span>
-            <span>6个关键词</span>
-        </div>
-    </div>
-    <div class="card-content">
-        <div class="circle-list">
-            <el-progress type="circle" :percentage="49" width="70">
-            </el-progress>
-            <el-progress type="circle" :percentage="17" width="70">
-            </el-progress>            
-            <el-progress type="circle" :percentage="80" width="70">
-            </el-progress>
-        </div>
-    </div>
+<div>
+    <tab :curPage="3">
+        <li v-for="(item,index) in dataList" :key="index">
+            <div class="data-card">
+                <div class="card-border">
+                    <div class="circle-label">
+                        <span>{{item.viewNum}}</span>
+                        <span>{{item.commandNum}}个讨论</span>
+                        <span>{{item.keyWordNum}}个关键词</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="circle-list">
+                        <el-progress type="circle" :percentage="item.viewPer" :width = '70'>
+                        </el-progress>
+                        <el-progress type="circle" :percentage="item.commandPer" :width = '70'>
+                        </el-progress>            
+                        <el-progress type="circle" :percentage="item.keyWordPer" :width = '70'>
+                        </el-progress>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </tab>
+</div>
 
-  </div>
 </template>
-
 <script>
+import tab from '@/components/tab'
 export default {
-
+    components:{
+        tab
+    },
+    data(){
+        return{
+            dataList: [
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, viewPer: 49, commandPer: 22, keyWordPer: 19,},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, viewPer: 22, commandPer: 33, keyWordPer: 29,},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, viewPer: 88, commandPer: 33, keyWordPer: 69,},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, viewPer: 10, commandPer: 83, keyWordPer: 99,},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, viewPer: 23, commandPer: 23, keyWordPer: 39,},
+                ]
+        }
+    }
 }
 </script>
 
 <style lang="scss">
- @import '../assets/main.scss';
     .data-card{
         position: relative;
         font-size: 0.32rem;
-        margin: 0.4rem;
+        margin: 0.4rem auto;
         width: 6.4rem;
         height: 4rem;
+        $themeColor: #6ca8c2;
         // 卡片边框
         .card-border{
             position: absolute;
@@ -42,7 +61,7 @@ export default {
             left: 0;
             width: 100%;
             height: 100%;
-            border: 2px solid #6ca8c2;
+            border: 2px solid $themeColor;
             border-radius: 0.4rem 0.7rem 0.4rem 0.4rem;
             box-sizing: border-box;
             .circle-label{
@@ -58,7 +77,7 @@ export default {
                 span{
                 padding: 0.05rem 0.3rem;
                 border-radius: 0.16rem;
-                background-color: #6ca8c2;
+                background-color: $themeColor;
                 }
             }
         }
@@ -69,8 +88,8 @@ export default {
             left: 0;
             height: 75%;
             width: 100%;
-            background: #6ca8c2;
-            border: 2px solid #6ca8c2;
+            background: $themeColor;
+            border: 2px solid $themeColor;
             border-radius: 0.4rem 0.7rem 0.3rem 0.3rem;
             box-sizing: border-box;
             z-index: 101;
@@ -90,7 +109,7 @@ export default {
             left: 0;
             top: 0.46rem;
             background-color: #fff;
-            color: #6ca8c2;
+            color: $themeColor;
             font-size: 0.24rem;
             height: 0.36rem;
             line-height: 0.36rem;
@@ -99,17 +118,16 @@ export default {
             border-radius: 0 0.3rem 0.3rem  0;
             padding-left: 0.34rem;
         }
+        // 进度条样式覆盖
+        .el-progress--circle .el-progress__text, .el-progress--dashboard .el-progress__text {
+            font-size: 0.45rem !important;
+            color: #ffffff;
+        }
+        .el-progress-circle__track {
+            stroke: #9ad5ef;
+        }
+        .el-progress-circle__path {
+            stroke: #ffffff;
+        }
     }
-    // 进度条样式覆盖
-    .el-progress--circle .el-progress__text, .el-progress--dashboard .el-progress__text {
-        font-size: 0.45rem !important;
-        color: #ffffff;
-    }
-    path.el-progress-circle__track {
-        stroke: #9ad5ef;
-    }
-    path.el-progress-circle__path {
-        stroke: #ffffff;
-    }
-
 </style>

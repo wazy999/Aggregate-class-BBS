@@ -1,35 +1,15 @@
 <template>
     <div class="tab-container">
-        <ul class="tab-title-container">
-            <li class="tab-title"
-                v-for="(title,index) in tabtitles"
-                :class="{'active': index+1===currentPage}"
-                :key="index"
-                @click="setPage(index+1)">{{title}}
-            </li>
-        </ul>
-        <!-- decide if bind touchstart -->
-        <div v-if="slidable"
-             class="tabswiper"
+        <div class="tabswiper"
              :class="{'invisible':invisible}"
-             @touchstart="_onTouchStart">
-            <div class="tabswiper-wrap"
+             @touchstart="onTouchStart">
+            <ul class="tabswiper-wrap"
                  ref="tabswiper-wrap"
                  :class="{'dragging': dragging}"
                  :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}"
-                 @transitionend="_onTransitionEnd">
+                 @transitionend="onTransitionEnd">
                 <slot></slot>
-            </div>
-        </div>
-        <div v-else class="tabswiper"
-             :class="{'invisible':invisible}">
-            <div class="tabswiper-wrap"
-                 ref="tabswiper-wrap"
-                 :class="{'dragging': dragging}"
-                 :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}"
-                 @transitionend="_onTransitionEnd">
-                <slot></slot>
-            </div>
+            </ul>
         </div>
     </div>
 </template>
@@ -46,14 +26,6 @@
         reg=eval(reg);
         return str.replace(reg,replace)
     }
-
-     /**
-     * 
-     * @author bajian
-     * @param  el 原生element
-     * @param  className 允许多个，空格隔开
-     * @return 
-     */
     const addClass=(el,className)=>{
         if (!className) 
             return false;
@@ -61,14 +33,6 @@
         el.className += ' ' + className.join(' ');
         return true;
     };
-
-     /**
-     * 
-     * @author bajian
-     * @param  el 原生element
-     * @param  className 允许多个，空格隔开
-     * @return 
-     */
     const removeClass=(el,className)=>{
         if (!className) 
             return false;
@@ -83,21 +47,12 @@
         return true;
     };
 
-
-    export default {
+   export default {
         props: {
-            tabtitles: {
-                type: Array,
-                default: []
-            },
             curPage: {
                 type: Number,
                 default: 1
             },
-            slidable: {
-                type: Boolean,
-                default: true
-            }
         },
         watch: {
             curPage: function (val) {
@@ -123,9 +78,11 @@
         },
         mounted(){
             this.$nextTick(function () {
-                this._onTouchMove = this._onTouchMove.bind(this);
-                this._onTouchEnd = this._onTouchEnd.bind(this);
+                this.onTouchMove = this.onTouchMove.bind(this);
+                this.onTouchEnd = this.onTouchEnd.bind(this);
+                // 获取全部卡片dom结点列表
                 this.slideEls = this.$refs['tabswiper-wrap'].children;
+                console.log(this.slideEls)
                 this.dragging = true;
                 this.setPage(this.currentPage);
                 let _this = this;
@@ -144,7 +101,7 @@
                     page++;
                     this.setPage(page);
                 } else {
-                    this._revert();
+                    this.revert();
                 }
             },
             prev() {
@@ -153,9 +110,10 @@
                     page--;
                     this.setPage(page);
                 } else {
-                    this._revert();
+                    this.revert();
                 }
             },
+            // 重置页面
             setPage(page) {
                 this.lastPage = this.currentPage;
                 this.currentPage = page;
@@ -164,22 +122,22 @@
                     //previousValue,currentValue,currentIndex
                     return i > page - 2 ? total : total + el['clientWidth'];
                 }, 0);
-                this._onTransitionStart();
+                this.onTransitionStart();
             },
-            _onTouchStart(e) {
-                this.startPos = this._getTouchPos(e);
-                this.startYPos = this._getTouchYPos(e);
+            onTouchStart(e) {
+                this.startPos = this.getTouchPos(e);
+                this.startYPos = this.getTouchYPos(e);
                 this.delta = 0;
                 this.startTranslateX = this.translateX;
                 this.startTime = new Date().getTime();
                 this.dragging = true;
 
-                document.addEventListener('touchmove', this._onTouchMove, false);
-                document.addEventListener('touchend', this._onTouchEnd, false);
+                document.addEventListener('touchmove', this.onTouchMove, false);
+                document.addEventListener('touchend', this.onTouchEnd, false);
             },
-            _onTouchMove(e) {
-                this.delta = this._getTouchPos(e) - this.startPos;
-                this.deltaY = Math.abs(this._getTouchYPos(e) - this.startYPos);
+            onTouchMove(e) {
+                this.delta = this.getTouchPos(e) - this.startPos;
+                this.deltaY = Math.abs(this.getTouchYPos(e) - this.startYPos);
 
                 switch (this.judge) {
                     case JUDGE_INITIAL:
@@ -207,7 +165,8 @@
                 }
 
             },
-            _onTouchEnd(e) {
+            // 页面跳转
+            onTouchEnd(e) {
                 this.dragging = false;
                 if (this.judge == JUDGE_SLIDEING) {
                     var isQuickAction = new Date().getTime() - this.startTime < 1000;
@@ -216,27 +175,27 @@
                     } else if (this.delta > 100 || (isQuickAction && this.delta > 15 && this.deltaY / this.delta < 6)) {
                         this.prev();
                     } else {
-                        this._revert();
+                        this.revert();
                     }
                 }
                 this.judge = JUDGE_INITIAL
-                document.removeEventListener('touchmove', this._onTouchMove);
-                document.removeEventListener('touchend', this._onTouchEnd);
+                document.removeEventListener('touchmove', this.onTouchMove);
+                document.removeEventListener('touchend', this.onTouchEnd);
             },
-            _revert() {
+            revert() {
                 this.setPage(this.currentPage);
             },
-            _getTouchPos(e) {
+            getTouchPos(e) {
                 var key = 'pageX';
                 return e.changedTouches ? e.changedTouches[0][key] : e[key];
             },
-            _getTouchYPos(e) {
+            getTouchYPos(e) {
                 var key = 'pageY';
                 return e.changedTouches ? e.changedTouches[0][key] : e[key];
             },
-            _onTransitionStart() {
+            onTransitionStart() {
                 this.transitioning = true;
-                if (this._isPageChanged()) {
+                if (this.isPageChanged()) {
                     this.$emit('tab-change-start', this.currentPage);
                     //FIX:remove the height of the hidden tab-items
                     [].forEach.call(this.slideEls,(item,index)=>{
@@ -246,24 +205,22 @@
                         else {
                             addClass(item,'hide-height')
                         }
-
-
                     })
                 } else {
                     this.$emit('tab-revert-start', this.currentPage);
                 }
             },
-            _onTransitionEnd(e) {
+            onTransitionEnd(e) {
                 e.stopPropagation()
                 if (e.target.className != 'tabswiper-wrap') return;
                 this.transitioning = false;
-                if (this._isPageChanged()) {
+                if (this.isPageChanged()) {
                     this.$emit('tab-change-end', this.currentPage);
                 } else {
                     this.$emit('tab-revert-end', this.currentPage);
                 }
             },
-            _isPageChanged() {
+            isPageChanged() {
                 return this.lastPage !== this.currentPage;
             }
         }
@@ -271,94 +228,41 @@
 </script>
 
 <style type="text/css">
-.tab-container{
-    width: 100%;
-}
+    .tab-container{
+        width: 100%;
+    }
     .invisible{
         visibility:hidden;
     }
     .tabswiper {
       position: relative;
       overflow: hidden;
-  }
-  .tabswiper-wrap {
-    display: flex;
-    display: inline-flex;
-    width: 100%;
-    height: 100%;
-    transition: all 0.2s ease;
-    flex-direction: row;
-}
-.tabswiper-wrap.dragging{
-    transition: none;
-}
-.tabswiper-wrap> div {
-  overflow-x:hidden; 
-  flex-shrink: 0;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-  height: inherit;
-}
-
-.tabswiper-wrap> .hide-height {
-  height: 0px;
-}
-
-::-webkit-scrollbar  
-{  
-    width: 0px;  
-}  
-
-.tab-title-container{
-    position: relative;
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-    /*display: table;*/
-    margin: 0 auto;
-    list-style: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    text-decoration: none;
-    -webkit-user-select: none;
-    outline: none;
-    border-bottom: 1px solid #dddddd;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -o-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    -webkit-appearance:none;
-    text-decoration: none;
-}
-.tab-title{
-    -webkit-appearance:none;
-    height: 35px;
-    line-height: 35px;
-    position: relative;
-    text-align: center;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    text-decoration: none;
-    -webkit-user-select: none;
-    outline: none;
-    outline-style: none;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    /*    display: block;*/
-}
-.tab-title.active,.tab-title:active {
-    border-bottom: 2px solid #36acf4;
-    color: #36acf4;
-}
-
-
+    }
+    .tabswiper-wrap {
+        display: flex;
+        /* display: inline-flex; */
+        width: 100%;
+        height: 100%;
+        transition: all 0.3s cubic-bezier(.55,0,.1,1);
+        flex-direction: row;
+    }
+    .tabswiper-wrap.dragging{
+        transition: none;
+    }
+    .tabswiper-wrap> li {
+        overflow-x: hidden; 
+        flex-shrink: 0;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        height: inherit;
+    }
+    .tabswiper-wrap> .hide-height {
+        height: 0px;
+        transition: height 1s cubic-bezier(.55,0,.1,1);
+    }
+    ::-webkit-scrollbar  
+    {  
+        width: 0px;  
+    }  
 </style>
