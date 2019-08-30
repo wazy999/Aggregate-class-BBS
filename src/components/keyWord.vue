@@ -20,6 +20,8 @@
 
 <script>
 export default {
+    props:['keyword1'],
+    props:['keyword2'],
     data() {
         return{
             wordList :[{num: 30},{num: 20},{num: 20},{num: 50},{num: 42}]
@@ -73,4 +75,5 @@ export default {
            }
        }
    }
+   
 </style>

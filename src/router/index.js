@@ -4,7 +4,7 @@ import index from '@/pages/index'
 import data from '@/pages/data'
 import postDetail from '@/pages/postDetail'
 import card from '@/components/card'
-
+import discuss from '@/pages/discuss'
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +25,11 @@ export default new Router({
       path: '/card',
       name: '卡片',
       component: card
+    },
+    {
+      path: '/discuss',
+      name: '评论展示',
+      component: discuss
     }
   ]
 })
