@@ -157,7 +157,7 @@ export default {
          {author: 'yjsp1',discussDate:'2018-08-26',discusstime:'12:28:22',floorNum:'18',content:'压榨阿……a8该被炎上了',},
          {author: 'findjya',discussDate:'2018-08-25',discusstime:'20:25:22',floorNum:'20',content:'压榨传言？？？……a8在搞啥？',},
          {author: 'dfdaa',discussDate:'2018-08-28',discusstime:'01:27:22',floorNum:'80',content:'老爱阿……a8该被炎上了',},
-         {author: 'ddssa',discussDate:'2018-08-27',discusstime:'20:24:22',floorNum:'5',content:'我要原初爱呜呜呜',}
+         {author: 'ddssa',discussDate:'2018-08-27',discusstime:'20:24:22',floorNum:'95',content:'我要原初爱呜呜呜',}
       ],//评论列表
         postList33:[
          {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'23',content:'干，自从点开这个帖子钱包的口子堵不住了',},
