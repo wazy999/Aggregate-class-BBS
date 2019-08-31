@@ -78,10 +78,10 @@
         <ul>
             <li v-for="(post,index) in postList33" :key="index" class="postCard">
             <div class="postCardHeader" :style = "'padding-bottom:0.5rem;'">
-                <span :style="'color: #5e3277;'">{{post.author}}</span>
-                <span :style="'color: #5e3277;'">{{post.discussDate}}</span>
-                <span :style="'color: #5e3277;'">{{post.discusstime}}</span> 
-                <span :style="'background-color:#fff6b7;position:absolute;color:black;border-radius: 0.18rem;width: 0.86rem;height: 0.38rem;text-align:center;right:0.36rem'">#{{post.floorNum}}</span> 
+                <span :style="'color: pink;'">{{post.author}}</span>
+                <span :style="'color: pink;'">{{post.discussDate}}</span>
+                <span :style="'color: pink;'">{{post.discusstime}}</span> 
+                <span :style="'background-color:pink;position:absolute;color:black;border-radius: 0.18rem;width: 0.86rem;height: 0.38rem;text-align:center;right:0.36rem'">#{{post.floorNum}}</span> 
             </div>
             <div class="postCardContent">{{post.content}}</div>
             </li>
@@ -145,13 +145,13 @@ export default {
       keyword2:'压榨',
       //帖子列表
        postList1: [
-        {type: 'modual1', addNum: '60', newestDate: '5s',origin: 'Stage1-动漫', author: 'Sgacra', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '【V4】虚拟YouTuber(vtuber)综合交流讨论专楼[新人请阅读主楼]'},
+        {type: 'modual1', addNum: '60', newestDate: '5s',origin: '猫扑', author: 'Sgacra', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '【V4】虚拟YouTuber(vtuber)综合交流讨论专楼[新人请阅读主楼]'},
       ],
       postList3: [
-        {type: 'modual1', addNum: '2528', newestDate: '1h30m',origin: 'NGA  - Vtuber', author: 's1观测站', aime: '2019-07-15', date: '18:23:32', aotalNum: '300256', content: '“にじさんじ”所属Vtuber综合交流讨论贴V2'},
+        { addNum: '2528', newestDate: '1h30m',origin: 'NGA  - Vtuber', author: 's1观测站', aime: '2019-07-15', date: '18:23:32', aotalNum: '300256', content: '“にじさんじ”所属Vtuber综合交流讨论贴V2'},
       ],
       postList4: [
-        {type: 'modual1', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: 'sl', aime: '2019-08-24', date: '21:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
+        {type: 'modual1', addNum: '35', newestDate: '5s',origin: '猫扑', author: 'sl', aime: '2019-08-24', date: '21:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
       ],
        postList2:[
          {author: 'yjsp1',discussDate:'2018-08-26',discusstime:'12:28:22',floorNum:'18',content:'压榨阿……a8该被炎上了',},
