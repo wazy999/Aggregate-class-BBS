@@ -1,12 +1,13 @@
 <template>
   <div class="key-word">
-      <!-- <div class="bg-line">
+      <div class="bg-line">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-      </div> -->
+      </div>
+      <div><span class="title">词频统计</span></div>
       <!-- 溢出滚动  改变滚动样式 -->
       <key-word :curPage="1"> 
         <li v-for="(item, index) in wordList" 
@@ -36,7 +37,7 @@
 import keyWord from '@/components/keyWordSwiper'
 
 export default {
-    props: ['timeType'],
+    props: ['timeType','page'],
     data() {
         return{
             wordList: [],
@@ -131,6 +132,27 @@ export default {
                     break
                 default: break
             }
+        },
+        page: function(val){
+            console.log(val,'✌')
+            switch(val){
+                case 1:
+                    this.wordList = this.wordListMonth
+                    break
+                case 2:
+                    this.wordList = this.wordListWeek
+                    break                
+                case 3:
+                    this.wordList = this.wordListDay
+                    break                
+                case 4:
+                    this.wordList = this.wordListMonth
+                    break
+                case 5:
+                    this.wordList = this.wordListYear
+                    break
+                default: break
+            }
         }
     },
     methods:{
@@ -160,6 +182,17 @@ export default {
         height: 6rem;
         position: relative;
         width: 100%;
+        .title{
+            position: absolute;
+            top: -0.24rem;
+            left: 0.52rem;
+            background-color: #6ca8c2;
+            color: #fff;
+            display: inline-block;
+            font-size: 0.24rem;
+            border-radius: 0 0.26rem 0.26rem 0;
+            padding: 0.08rem 0.36rem;
+        }
        .bg-line{
            width: 100%;
            height: 5.2rem;
@@ -168,13 +201,16 @@ export default {
            flex-direction: column;
            justify-content: space-between;
            box-sizing: border-box;
-           z-index: 100;
+           z-index: -999;
            top: 0;
            span{
                height: 1.02rem;
                border-bottom: 0.02rem solid #cfe2eb;
+               &:last-child{
+                    border-bottom: 0.12rem solid #cfe2eb;
+               }
            }
-           &::before{
+           &::after{
                content: '';
                position: absolute;
                top: 0;
@@ -183,8 +219,20 @@ export default {
                width: 0.2rem;
                border-left: 0.02rem solid #cfe2eb;
            }
+           &::before{
+                content: '';
+                height: 0.12rem;
+                width: 0.52rem;
+                background: #6ca8c2;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+
+           }
        }
-       .key-word-item{
+        .key-word-item{
+            position: relative;  
+            z-index: 999;
             .item-style{
                 display: flex;
                 flex-direction: column;
@@ -194,10 +242,10 @@ export default {
                 position: relative;  
                 .item-title{
                     border-radius: 0.18rem;
-                    height: 0.36rem;
+                    // height: 0.36rem;
                     color: #fff;
                     font-size: 0.22rem;
-                    padding: 0 0.4rem;
+                    padding: 0.02rem 0.4rem;
                     margin-bottom: 0.2rem;
                 }
                 .item-progress{
@@ -205,6 +253,7 @@ export default {
                     width: 0.12rem;
                     display: inline-block;
                     position: relative;
+                    transition: height 0.4s cubic-bezier(.55,0,.1,1);
                     .replace-text{
                         position: absolute;
                         width: 0.9rem;
@@ -233,6 +282,7 @@ export default {
                     ('yellow', #fee432, #fff6b7);
         @each $name, $bgColor, $pathColor in $themeColor{
             .themeColor--#{$name}{
+                z-index: 999;
                 // 标题 竖线
                 .item-title , .item-progress , .row-line{
                     background-color: $bgColor;
@@ -249,6 +299,7 @@ export default {
                 }  
             } 
         }
+
    }
    
 </style>

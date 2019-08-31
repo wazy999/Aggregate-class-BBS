@@ -235,8 +235,10 @@
 <style>
     .keyWord-container{
         width: 6.8rem;
-        height: 5.4rem;
-        margin: 0 0 0 0.4rem;
+        /* height: 5.4rem; */
+        margin: 0 0 0 0.52rem;
+        position: absolute;
+        bottom: 0;
     }
     .invisible{
         visibility: hidden;
@@ -265,6 +267,7 @@
         margin: 0px;
         padding: 0px;
         height: inherit;
+        transition: height 1s cubic-bezier(.55,0,.1,1);
     }
     .keyWordSwiper-wrap> .hide-height {
         height: 0px;
@@ -273,5 +276,5 @@
     ::-webkit-scrollbar  
     {  
         width: 0px;  
-    }  
+    } 
 </style>

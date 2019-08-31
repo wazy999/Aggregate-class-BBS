@@ -1,8 +1,5 @@
 <template>
   <div class="project-header">
-    <div class="top-iphone">
-        <img src="../assets/image/header.png" style="width: 100%;" />
-    </div>
     <div class="top-foroum">
         <img src="../assets/image/headerIcon.png"/>
         <span class="pageName">{{pageName}}</span>
@@ -20,19 +17,13 @@ export default {
 .project-header{
     float: left;
     position: relative;
-    position: fixed;
     top: 0;
     left: 0;
     width:100%;
-    // height: 1.28rem;
-    padding: 0;
-    font-size: 0.32rem;
+    height: 1rem;
+    padding: 0.1rem 0 0.08rem 0;
+    font-size: 0.36rem;
     background: #faf9fb;
-    z-index: 999;
-    .top-iphone{
-        padding: 0 0.32rem;
-
-    }
     .top-foroum{
         img{
             width: 0.8rem;
@@ -41,9 +32,9 @@ export default {
             vertical-align: middle;
         }
         span{
-            vertical-align: middle;
+            vertical-align: bottom;
             color:#6ca8c2;
-            margin-left: 1.8rem;
+            margin-left: 0.1rem;
         }
     }
 }

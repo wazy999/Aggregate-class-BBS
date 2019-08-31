@@ -115,6 +115,7 @@
             },
             // 重置页面
             setPage(page) {
+                this.$emit('pageChange',page)
                 this.lastPage = this.currentPage;
                 this.currentPage = page;
                 let res = [].reduce.call(this.slideEls, function (total, el, i) {
@@ -253,7 +254,7 @@
     .tabswiper-wrap.dragging{
         transition: none;
     }
-    .tabswiper-wrap> li {
+    .tab-container .tabswiper-wrap> li {
         overflow-x: hidden; 
         flex-shrink: 0;
         width: 100%;

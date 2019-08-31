@@ -76,7 +76,6 @@ export default {
 .indexPage{
   padding: 0;
   margin: 0;
-  margin-top: 63.2px;
   width: 100%;
   color: #707070;
   box-sizing: border-box;

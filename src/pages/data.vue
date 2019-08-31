@@ -1,6 +1,6 @@
 <template>
   <div class="data-page">
-    <forum-header></forum-header>
+    <forum-header :pageName="'数据统计'"></forum-header>
     <div class="data-statistics">
       <div class="data-select">
           <span :class="{active : isSelected == 'day', brother: isSelected == 'week'}" @click="dateSelect('day')">日</span>
@@ -9,7 +9,10 @@
           <span :class="{active : isSelected == 'year'}" @click="dateSelect('year')">年</span>
       </div>
       <div class="card-list">
-        <card :timeType="isSelected" :key = "keySelected"></card>
+        <card :timeType="isSelected" @cardPageChange="pageChange"></card>
+      </div>
+      <div class="key-word">
+        <key-word :timeType="isSelected" :page = 'page'></key-word>
       </div>
     </div>
   </div>
@@ -23,6 +26,7 @@ export default {
   data() {
     return {
       isSelected: 'day',
+      page: 0,
     }
   },
   components:{
@@ -34,8 +38,9 @@ export default {
     dateSelect(val){
       this.isSelected = val
     },
-    changeKeyWord(val){
-      console.log(val)
+    pageChange(data){
+      console.log(data,'222222')
+      this.page = data
     }
   }
 }
@@ -44,13 +49,14 @@ export default {
 <style lang="scss" scoped>
 .data-page{
    position: relative;
-   margin-top: 63.2px;
+  //  margin-top: 63.2px;
   //  height: 600px;
   .data-statistics{
      font-size: 0.32rem;
      $themeColor: #6ca8c2;
+     height: -webkit-fill-available;
      .data-select{
-       margin: 1.5rem 0.32rem 0.4rem;
+       margin: 0 0.32rem 0.4rem;
        border: 0.02rem solid $themeColor;
        border-radius: 0.5rem;
        text-align: right;
@@ -81,22 +87,22 @@ export default {
       .brother{
         border: none;
       }
+      
      }
-     .data-down-title{
+     .data-up-title{
        span{
-        background-color: $themeColor;
-        color: #fff;
-        display: inline-block;
-        margin-left: 0.48rem;
-        font-size: 0.24rem;
-        border-radius: 0 0.26rem 0.26rem 0;
-        padding: 0.08rem 0.36rem;
+          background-color: $themeColor;
+          color: #fff;
+          display: inline-block;
+          margin-left: 0.48rem;
+          border-radius: 0.26rem;
+          padding: 0.08rem 0.36rem;
        }
      }
    }
-  // .key-word{
-  //   position: absolute;
-  //   bottom: 0;
-  // }
+  .key-word{
+    position: absolute;
+    bottom: 0;
+  }
 }
 </style>
