@@ -8,6 +8,7 @@ import keyWord from '@/components/keyWord'
 import discuss from '@/pages/discuss'
 import content from '@/components/content'
 import tabbar from '@/components/tabbar'
+import sidebar from '@/components/sidebar'
 Vue.use(Router)
 
 export default new Router({
@@ -44,6 +45,10 @@ export default new Router({
       path: '/tabbar',
       name: '底部导航栏',
       component: tabbar
-    },
+    }, {
+      path: '/sidebar',
+      name: '侧边栏',
+      component: sidebar
+    }
   ]
 })

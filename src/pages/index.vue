@@ -2,14 +2,16 @@
  <div>
      <!-- 头部固定信息 -->
     <forum-header :pageName="pageTitle"></forum-header>
+    <!-- 侧边栏 -->
+    <forum-sidebar></forum-sidebar>
     <!-- 页面主要内容 -->
     <div class="indexPage">
         <div class="postCard" style="padding-bottom: 0.24rem">
             <input placeholder="搜索..."/>
             <div class="beforeLine" style="background-color: #6ca8c2;"></div>
         </div>
-        <ul>
-            <li v-for="(post,index) in postList" :key="index" class="postCard">
+        <ul >
+            <li v-for="(post,index) in postList" :key="index" class="postCard" @click="switchTo('/postDetail')">
             <div class="beforeLine" :style="{backgroundColor: (post.type == 'modual1') ? '#f8dd25' : (post.type == 'modual2') ? '#33c9b0' : '#f99dce'}"></div>
             <div class="postCardHeader">
                 <span :style="{backgroundColor: (post.type == 'modual1') ? '#f8dd25' : (post.type == 'modual2') ? '#33c9b0' : '#f99dce'}">+{{post.addNum}}</span>
@@ -35,7 +37,7 @@
 <script>
 import header from '@/components/header'
 import tabbar from '@/components/tabbar'
-
+//import sidebar from '@/components/sidebar'
 export default {
   data () {
     return {
@@ -57,7 +59,14 @@ export default {
   },
   components:{
     forumHeader: header,
-    forumTabbar: tabbar
+    forumTabbar: tabbar,
+    //forumSidebar:sidebar
+  },
+  methods:{
+    switchTo(path){
+      // console.log(this.$router)
+      this.$router.replace(path)
+    }
   }
 }
 </script>
