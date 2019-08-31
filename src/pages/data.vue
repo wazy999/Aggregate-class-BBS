@@ -52,7 +52,6 @@ export default {
 <style lang="scss" scoped>
 .data-page{
    position: relative;
-   margin-top: 63.2px;
   //  height: 600px;
   .data-statistics{
      font-size: 0.32rem;
