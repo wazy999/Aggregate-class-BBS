@@ -28,11 +28,13 @@
             </li>
         </ul>
     </div>
+    <forum-tabbar></forum-tabbar>
  </div>
 </template>
 
 <script>
 import header from '@/components/header'
+import tabbar from '@/components/tabbar'
 
 export default {
   data () {
@@ -54,7 +56,8 @@ export default {
     }
   },
   components:{
-    forumHeader: header
+    forumHeader: header,
+    forumTabbar: tabbar
   }
 }
 </script>

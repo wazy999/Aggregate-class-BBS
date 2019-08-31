@@ -23,6 +23,7 @@
         <key-word></key-word>
       </div>
     </div>
+    <forum-tabbar></forum-tabbar>
   </div>
 </template>
 
@@ -30,6 +31,7 @@
 import header from '@/components/header'
 import card from '@/components/card'
 import keyWord from '@/components/keyWord'
+import tabbar from '@/components/tabbar'
 export default {
   data() {
     return {
@@ -38,6 +40,7 @@ export default {
   },
   components:{
     forumHeader: header,
+    forumTabbar: tabbar,
     card,
     keyWord
   },

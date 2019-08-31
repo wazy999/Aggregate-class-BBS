@@ -7,7 +7,7 @@ import card from '@/components/card'
 import keyWord from '@/components/keyWord'
 import discuss from '@/pages/discuss'
 import content from '@/components/content'
-
+import tabbar from '@/components/tabbar'
 Vue.use(Router)
 
 export default new Router({
@@ -40,6 +40,10 @@ export default new Router({
       path: '/content',
       name: '帖子内容',
       component: content
-    }
+    }, {
+      path: '/tabbar',
+      name: '底部导航栏',
+      component: tabbar
+    },
   ]
 })
