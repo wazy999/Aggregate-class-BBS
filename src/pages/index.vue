@@ -2,14 +2,16 @@
  <div>
      <!-- 头部固定信息 -->
     <forum-header :pageName="pageTitle"></forum-header>
+    <!-- 侧边栏 -->
+    <forum-sidebar></forum-sidebar>
     <!-- 页面主要内容 -->
     <div class="indexPage">
         <div class="postCard" style="padding-bottom: 0.24rem">
             <input placeholder="搜索..."/>
             <div class="beforeLine" style="background-color: #6ca8c2;"></div>
         </div>
-        <ul>
-            <li v-for="(post,index) in postList" :key="index" class="postCard">
+        <ul >
+            <li v-for="(post,index) in postList" :key="index" class="postCard" @click="switchTo('/postDetail')">
             <div class="beforeLine" :style="{backgroundColor: (post.type == 'modual1') ? '#f8dd25' : (post.type == 'modual2') ? '#33c9b0' : '#f99dce'}"></div>
             <div class="postCardHeader">
                 <span :style="{backgroundColor: (post.type == 'modual1') ? '#f8dd25' : (post.type == 'modual2') ? '#33c9b0' : '#f99dce'}">+{{post.addNum}}</span>
@@ -28,36 +30,43 @@
             </li>
         </ul>
     </div>
+    <forum-tabbar></forum-tabbar>
  </div>
 </template>
 
 <script>
 import header from '@/components/header'
-
+import tabbar from '@/components/tabbar'
+//import sidebar from '@/components/sidebar'
 export default {
   data () {
     return {
       navVisible: false,
       pageTitle: '首页',
       postList: [
-        {type: 'modual1', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual2', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '欢迎来到PMC格里芬法兰克福支部，姑娘们。想必在座的各位都是因这样或者那样的原因从原服役岗位淘汰，最终像电子垃圾一样被送到了这里。毫无疑问，你们的心智云图都在一定程度上出了些‘技术故障’，进而被划入了‘待处理品’的行列。但这些并不重要，这个地方唯一看重的只有诸位的作战能力，而你们也得靠着自己的能力挣扎着存活去!闲话少说，现在就请各位把自己的简历递交上来吧。'},
-        {type: 'modual3', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '上周末和心理医生预约了谈心，我怕了，不清楚自己是不是真的有病//'},
-        {type: 'modual1', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual2', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual3', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual1', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual2', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual3', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual1', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual2', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
-        {type: 'modual3', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
+        {type: 'modual1', addNum: '35', newestDate: '11s',origin: '猫扑', author: '浪荡公子', aime: '2019-02-22', date: '08:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
+        {type: 'modual2', addNum: '35', newestDate: '22s',origin: '百度贴吧', author: '以你为瘾', aime: '2019-08-27', date: '21:20:32', aotalNum: '300256', content: '欢迎来到PMC格里芬法兰克福支部，姑娘们。想必在座的各位都是因这样或者那样的原因从原服役岗位淘汰，最终像电子垃圾一样被送到了这里。毫无疑问，你们的心智云图都在一定程度上出了些‘技术故障’，进而被划入了‘待处理品’的行列。但这些并不重要，这个地方唯一看重的只有诸位的作战能力，而你们也得靠着自己的能力挣扎着存活去!闲话少说，现在就请各位把自己的简历递交上来吧。'},
+        {type: 'modual3', addNum: '35', newestDate: '4s',origin: 'Stage1-动漫', author: '狂客', aime: '2019-05-15', date: '08:01:32', aotalNum: '300256', content: '上周末和心理医生预约了谈心，我怕了，不清楚自己是不是真的有病//'},
+        {type: 'modual1', addNum: '35', newestDate: '55s',origin: '猫扑', author: '饮风道人', aime: '2019-08-14', date: '07:55:32', aotalNum: '300256', content: ' 就问你6元一台云虚拟主机,心动不？ '},
+        {type: 'modual2', addNum: '35', newestDate: '05s',origin: '百度贴吧', author: '庸俗命运', aime: '2019-04-10', date: '03:11:32', aotalNum: '300256', content: 'xwed去哪家医院比较好啊'},
+        {type: 'modual3', addNum: '35', newestDate: '52s',origin: 'Stage1-动漫', author: '野客', aime: '2019-08-22', date: '11:07:32', aotalNum: '300256', content: '怎样找回两年前的贴子'},
+        {type: 'modual1', addNum: '35', newestDate: '51s',origin: '猫扑', author: '地狱人间', aime: '2019-11-04', date: '14:55:32', aotalNum: '300256', content: '各位朋友帮我看看三个标题，长文分三次，内容是禅与投资'},
+        {type: 'modual2', addNum: '35', newestDate: '5s',origin: '百度贴吧', author: '幻噬 ', aime: '2019-22-05', date: '12:28:32', aotalNum: '300256', content: '最恨标题党，百度新闻不少，今日头条最甚'},
+        {type: 'modual3', addNum: '35', newestDate: '5s',origin: 'Stage1-动漫', author: '石磊', aime: '2019-04-12', date: '20:23:32', aotalNum: '300256', content: ' 有标题党不，来深入聊聊'}
      ]
 
     }
   },
   components:{
-    forumHeader: header
+    forumHeader: header,
+    forumTabbar: tabbar,
+    //forumSidebar:sidebar
+  },
+  methods:{
+    switchTo(path){
+      // console.log(this.$router)
+      this.$router.replace(path)
+    }
   }
 }
 </script>

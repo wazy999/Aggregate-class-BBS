@@ -1,7 +1,9 @@
 <template>
  <div>
      <!-- 头部固定信息 -->
-    <forum-header :pageName="pageTitle"></forum-header>
+     <div @click="back('/')" class="head">
+    <forum-header :pageName="pageTitle" ></forum-header>
+     </div>
     <!-- 帖子内容 -->
     <div class="indexPage">
         <ul>
@@ -60,8 +62,8 @@ export default {
     }
   },
   methods:{
-    back(){
-        this.$router.go(-1);//返回上一层
+    back(path){
+        this.$router.replace(path);//返回上一层
     },
   },
   components:{
@@ -72,8 +74,12 @@ export default {
 
 <style lang="scss" scoped>
  @import '../assets/main.scss';
-
+.head{
+  z-index: 99999;
+}
 .indexPage{
+  position: relative;
+  float: left;
   padding: 0;
   margin: 0;
   width: 100%;
