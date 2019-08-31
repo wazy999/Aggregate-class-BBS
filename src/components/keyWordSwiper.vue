@@ -1,10 +1,10 @@
 <template>
-    <div class="tab-container">
-        <div class="tabswiper"
+    <div class="keyWord-container">
+        <div class="keyWordSwiper"
              :class="{'invisible':invisible}"
              @touchstart="onTouchStart">
-            <ul class="tabswiper-wrap"
-                 ref="tabswiper-wrap"
+            <ul class="keyWordSwiper-wrap"
+                 ref="keyWordSwiper-wrap"
                  :class="{'dragging': dragging}"
                  :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}"
                  @transitionend="onTransitionEnd">
@@ -15,12 +15,9 @@
 </template>
 
 <script type="text/babel">
-
     const JUDGE_INITIAL = 0
     const JUDGE_SLIDEING = 1
     const JUDGE_SCROLLING = 2
-
-
     const replaceAll=(str,target,replace)=>{
         var reg="/"+target+"/g";    //查找时忽略大小写
         reg=eval(reg);
@@ -46,7 +43,6 @@
                 el.className = cls.trim();
         return true;
     };
-
    export default {
         props: {
             curPage: {
@@ -81,8 +77,13 @@
                 this.onTouchMove = this.onTouchMove.bind(this);
                 this.onTouchEnd = this.onTouchEnd.bind(this);
                 // 获取全部卡片dom结点列表
-                this.slideEls = this.$refs['tabswiper-wrap'].children;
-                // console.log(this.slideEls)
+                let cardDomList =[]
+                cardDomList = this.$refs['keyWordSwiper-wrap'].children;
+                // 将类数组转为 数组
+                let cardList = Array.prototype.slice.call(cardDomList)
+                for(let i = 0; i < cardList.length; i+=5){
+                    this.slideEls.push(cardList.slice(i, i + 5))
+                }
                 this.dragging = true;
                 this.setPage(this.currentPage);
                 let _this = this;
@@ -117,13 +118,16 @@
             setPage(page) {
                 this.lastPage = this.currentPage;
                 this.currentPage = page;
-                let res = [].reduce.call(this.slideEls, function (total, el, i) {
-                    //previousValue,currentValue,currentIndex
-                    //  console.log("当前元素的索引:",i)
-                    // console.log("要返回的值:",total)
-                    // console.log("当前元素:", el)
-                    return i > page - 2 ? total : total + el['clientWidth'];
-                }, 0);
+                // 计算x轴偏移
+                let res = this.slideEls.reduce(
+                    function (total, el, i) {
+                        let elWidth = 0
+                        for( let j =0;j<el.length;j++){
+                            // console.log(j,el[j].clientWidth)
+                            elWidth += el[j].clientWidth
+                        }
+                        return i > page - 2 ? total : total + elWidth;
+                    }, 0)
                 this.translateX = -res
                 // console.log(res,-res,this.translateX)
                 this.onTransitionStart();
@@ -145,8 +149,7 @@
 
                 switch (this.judge) {
                     case JUDGE_INITIAL:
-                        // if (Math.abs(this.delta) > 20 && this.deltaY<25) {//judge to allow/prevent scroll
-                        if (Math.abs(this.delta) / this.deltaY > 1.5) {//judge to allow/prevent scroll
+                        if (Math.abs(this.delta) / this.deltaY > 1.5) {
                             this.judge = JUDGE_SLIDEING
                             e.preventDefault();
                             e.stopPropagation()
@@ -201,7 +204,6 @@
                 this.transitioning = true;
                 if (this.isPageChanged()) {
                     this.$emit('tab-change-start', this.currentPage);
-                    //FIX:remove the height of the hidden tab-items
                     [].forEach.call(this.slideEls,(item,index)=>{
                         if (index== (this.currentPage-1)) {
                             removeClass(item,'hide-height')
@@ -216,7 +218,7 @@
             },
             onTransitionEnd(e) {
                 e.stopPropagation()
-                if (e.target.className != 'tabswiper-wrap') return;
+                if (e.target.className != 'keyWordSwiper-wrap') return;
                 this.transitioning = false;
                 if (this.isPageChanged()) {
                     this.$emit('tab-change-end', this.currentPage);
@@ -230,38 +232,41 @@
         }
     };
 </script>
-
 <style>
-    .tab-container{
-        width: 100%;
+    .keyWord-container{
+        width: 6.8rem;
+        height: 5.4rem;
+        margin: 0 0 0 0.4rem;
     }
     .invisible{
-        visibility:hidden;
+        visibility: hidden;
     }
-    .tabswiper {
+    .keyWordSwiper {
       position: relative;
       overflow: hidden;
     }
-    .tabswiper-wrap {
+    .keyWordSwiper-wrap {
+        list-style: none;
         display: flex;
         /* display: inline-flex; */
         width: 100%;
         height: 100%;
         transition: all 0.3s cubic-bezier(.55,0,.1,1);
         flex-direction: row;
+        align-items: flex-end;
     }
-    .tabswiper-wrap.dragging{
+    .keyWordSwiper-wrap.dragging{
         transition: none;
     }
-    .tabswiper-wrap> li {
+    .keyWordSwiper-wrap > li {
         overflow-x: hidden; 
         flex-shrink: 0;
-        width: 100%;
+        /* width: 100%; */
         margin: 0px;
         padding: 0px;
         height: inherit;
     }
-    .tabswiper-wrap> .hide-height {
+    .keyWordSwiper-wrap> .hide-height {
         height: 0px;
         transition: height 1s cubic-bezier(.55,0,.1,1);
     }

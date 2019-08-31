@@ -20,7 +20,7 @@ export default {
 .project-header{
     float: left;
     position: relative;
-    //position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
     width:100%;

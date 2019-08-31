@@ -1,11 +1,5 @@
 <template>
   <div class="data-page">
-    <!-- 
-      1.页面布局
-      2.进度条过渡增长
-      3.底部图形横向滑动
-      4.细节调整
-     -->
     <forum-header></forum-header>
     <div class="data-statistics">
       <div class="data-select">
@@ -14,13 +8,8 @@
           <span :class="{active : isSelected == 'month', brother: isSelected == 'year'}" @click="dateSelect('month')">月</span>
           <span :class="{active : isSelected == 'year'}" @click="dateSelect('year')">年</span>
       </div>
-      <div class="data-up-title"><span>绊爱</span></div>
       <div class="card-list">
-        <card></card>
-      </div>
-      <div class="data-down-title"><span>词频统计</span></div>
-      <div class="key-word">
-        <key-word></key-word>
+        <card :timeType="isSelected" :key = "keySelected"></card>
       </div>
     </div>
   </div>
@@ -44,6 +33,9 @@ export default {
   methods: {
     dateSelect(val){
       this.isSelected = val
+    },
+    changeKeyWord(val){
+      console.log(val)
     }
   }
 }
@@ -57,12 +49,6 @@ export default {
   .data-statistics{
      font-size: 0.32rem;
      $themeColor: #6ca8c2;
-     .blue-bg{
-       background-color: $themeColor;
-       color: #fff;
-       display: inline-block;
-       margin-left: 0.48rem;
-     }
      .data-select{
        margin: 1.5rem 0.32rem 0.4rem;
        border: 0.02rem solid $themeColor;
@@ -95,18 +81,13 @@ export default {
       .brother{
         border: none;
       }
-      
-     }
-     .data-up-title{
-       span{
-        @extend .blue-bg;
-        border-radius: 0.26rem;
-        padding: 0.08rem 0.36rem;
-       }
      }
      .data-down-title{
        span{
-        @extend .blue-bg;
+        background-color: $themeColor;
+        color: #fff;
+        display: inline-block;
+        margin-left: 0.48rem;
         font-size: 0.24rem;
         border-radius: 0 0.26rem 0.26rem 0;
         padding: 0.08rem 0.36rem;
