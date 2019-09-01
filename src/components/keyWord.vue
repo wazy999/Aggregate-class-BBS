@@ -8,14 +8,13 @@
           <span></span>
       </div>
       <div><span class="title">词频统计</span></div>
-      <!-- 溢出滚动  改变滚动样式 -->
       <key-word :curPage="1"> 
         <li v-for="(item, index) in wordList" 
             :key="index"
             class="key-word-item"
             :class="{'themeColor--green' : item.themeColor == 'green','themeColor--pink' : item.themeColor == 'pink','themeColor--yellow' : item.themeColor == 'yellow',}">
             <div class="item-style">
-                <span class="item-title" >{{item.title}}</span>
+                <span class="item-title" @click="goPage(item.topic,item.title,item.themeColor,item.percentage,item.height,item.num)">{{item.title}}</span>
                 <el-progress type="circle" 
                 :percentage="item.percentage" 
                 :width = '45' 
@@ -42,65 +41,65 @@ export default {
         return{
             wordList: [],
             wordListDay :[
-                {title: '1', num: 200, themeColor: 'green'},
-                {title: '2', num: 302, themeColor: 'pink'},
-                {title: '3', num: 113, themeColor: 'yellow'},
-                {title: '4', num: 222, themeColor: 'green'},
-                {title: '5', num: 23, themeColor: 'pink'}, 
-                {title: '6', num: 113, themeColor: 'yellow'},
-                {title: '7', num: 222, themeColor: 'green'},
-                {title: '8', num: 23, themeColor: 'pink'},
-                {title: '9', num: 113, themeColor: 'yellow'},
-                {title: '10', num: 222, themeColor: 'green'},
-                {title: '11', num: 23, themeColor: 'pink'},             
-                {title: '12', num: 23, themeColor: 'yellow'},             
-                {title: '13', num: 23, themeColor: 'pink'},             
-                {title: '14', num: 23, themeColor: 'green'},             
-                {title: '15', num: 23, themeColor: 'pink'},             
+                {topic: '绊爱', title: '赞同', num: 200, themeColor: 'green'},
+                {topic: '绊爱', title: '反对', num: 302, themeColor: 'pink'},
+                {topic: '绊爱', title: '与我无瓜', num: 113, themeColor: 'yellow'},
+                {topic: '绊爱', title: '4', num: 222, themeColor: 'green'},
+                {topic: '绊爱', title: '5', num: 23, themeColor: 'pink'}, 
+                {topic: '绊爱', title: '6', num: 113, themeColor: 'yellow'},
+                {topic: '绊爱', title: '7', num: 222, themeColor: 'green'},
+                {topic: '绊爱', title: '8', num: 23, themeColor: 'pink'},
+                {topic: '绊爱', title: '9', num: 113, themeColor: 'yellow'},
+                {topic: '绊爱', title: '10', num: 222, themeColor: 'green'},
+                {topic: '绊爱', title: '11', num: 23, themeColor: 'pink'},             
+                {topic: '绊爱', title: '12', num: 23, themeColor: 'yellow'},             
+                {topic: '绊爱', title: '13', num: 23, themeColor: 'pink'},             
+                {topic: '绊爱', title: '14', num: 23, themeColor: 'green'},             
+                {topic: '绊爱', title: '15', num: 23, themeColor: 'pink'},             
             ],           
              wordListWeek :[
-                {title: 'hhhh', num: 200, themeColor: 'green'},
-                {title: '2', num: 302, themeColor: 'pink'},
-                {title: '2', num: 302, themeColor: 'pink'},
-                {title: '3', num: 113, themeColor: 'yellow'},
-                {title: '4', num: 222, themeColor: 'green'},
-                {title: '5', num: 23, themeColor: 'pink'}, 
-                {title: '11', num: 23, themeColor: 'pink'},             
-                {title: '4', num: 222, themeColor: 'green'},
-                {title: '12', num: 23, themeColor: 'yellow'},             
-                {title: '13', num: 23, themeColor: 'pink'},             
-                {title: '14', num: 23, themeColor: 'green'},             
-                {title: '15', num: 23, themeColor: 'pink'},             
+                {topic: '关键词2', title: 'hhhh', num: 200, themeColor: 'green'},
+                {topic: '关键词2', title: '2', num: 302, themeColor: 'pink'},
+                {topic: '关键词2', title: '2', num: 302, themeColor: 'pink'},
+                {topic: '关键词2', title: '3', num: 113, themeColor: 'yellow'},
+                {topic: '关键词2', title: '4', num: 222, themeColor: 'green'},
+                {topic: '关键词2', title: '5', num: 23, themeColor: 'pink'}, 
+                {topic: '关键词2', title: '11', num: 23, themeColor: 'pink'},             
+                {topic: '关键词2', title: '4', num: 222, themeColor: 'green'},
+                {topic: '关键词2', title: '12', num: 23, themeColor: 'yellow'},             
+                {topic: '关键词2', title: '13', num: 23, themeColor: 'pink'},             
+                {topic: '关键词2', title: '14', num: 23, themeColor: 'green'},             
+                {topic: '关键词2', title: '15', num: 23, themeColor: 'pink'},             
             ],
             wordListMonth :[
-                {title: '2', num: 302, themeColor: 'pink'},
-                {title: '3', num: 113, themeColor: 'yellow'},                
-                {title: '8', num: 23, themeColor: 'pink'},
-                {title: '9', num: 113, themeColor: 'yellow'},
-                {title: '10', num: 222, themeColor: 'green'},
-                {title: '5', num: 23, themeColor: 'pink'}, 
-                {title: '6', num: 113, themeColor: 'yellow'},
-                {title: '7', num: 222, themeColor: 'green'},
-                {title: '11', num: 23, themeColor: 'pink'},             
-                {title: '12', num: 23, themeColor: 'yellow'},             
-                {title: '13', num: 23, themeColor: 'pink'},             
-                {title: '15', num: 23, themeColor: 'pink'},             
+                {topic: '关键词3', title: '2', num: 302, themeColor: 'pink'},
+                {topic: '关键词3', title: '3', num: 113, themeColor: 'yellow'},                
+                {topic: '关键词3', title: '8', num: 23, themeColor: 'pink'},
+                {topic: '关键词3', title: '9', num: 113, themeColor: 'yellow'},
+                {topic: '关键词3', title: '10', num: 222, themeColor: 'green'},
+                {topic: '关键词3', title: '5', num: 23, themeColor: 'pink'}, 
+                {topic: '关键词3', title: '6', num: 113, themeColor: 'yellow'},
+                {topic: '关键词3', title: '7', num: 222, themeColor: 'green'},
+                {topic: '关键词3', title: '11', num: 23, themeColor: 'pink'},             
+                {topic: '关键词3', title: '12', num: 23, themeColor: 'yellow'},             
+                {topic: '关键词3', title: '13', num: 23, themeColor: 'pink'},             
+                {topic: '关键词3', title: '15', num: 23, themeColor: 'pink'},             
             ],            
             wordListYear :[
-                {title: '3', num: 113, themeColor: 'yellow'},
-                {title: '10', num: 222, themeColor: 'green'},
-                {title: '11', num: 23, themeColor: 'pink'},             
-                {title: '12', num: 23, themeColor: 'yellow'},             
-                {title: '13', num: 23, themeColor: 'pink'},             
-                {title: '14', num: 23, themeColor: 'green'},             
-                {title: '15', num: 23, themeColor: 'pink'}, 
-                {title: '3', num: 113, themeColor: 'yellow'},
-                {title: '4', num: 222, themeColor: 'green'},
-                {title: '5', num: 23, themeColor: 'pink'}, 
-                {title: '6', num: 113, themeColor: 'yellow'},
-                {title: '7', num: 222, themeColor: 'green'},
-                {title: '8', num: 23, themeColor: 'pink'},
-                {title: '9', num: 113, themeColor: 'yellow'},            
+                {topic: '关键词4', title: '3', num: 113, themeColor: 'yellow'},
+                {topic: '关键词4', title: '10', num: 222, themeColor: 'green'},
+                {topic: '关键词4', title: '11', num: 23, themeColor: 'pink'},             
+                {topic: '关键词4', title: '12', num: 23, themeColor: 'yellow'},             
+                {topic: '关键词4', title: '13', num: 23, themeColor: 'pink'},             
+                {topic: '关键词4', title: '14', num: 23, themeColor: 'green'},             
+                {topic: '关键词4', title: '15', num: 23, themeColor: 'pink'}, 
+                {topic: '关键词4', title: '3', num: 113, themeColor: 'yellow'},
+                {topic: '关键词4', title: '4', num: 222, themeColor: 'green'},
+                {topic: '关键词4', title: '5', num: 23, themeColor: 'pink'}, 
+                {topic: '关键词4', title: '6', num: 113, themeColor: 'yellow'},
+                {topic: '关键词4', title: '7', num: 222, themeColor: 'green'},
+                {topic: '关键词4', title: '8', num: 23, themeColor: 'pink'},
+                {topic: '关键词4', title: '9', num: 113, themeColor: 'yellow'},            
             ],
             totalWord: 0,
         }
@@ -134,7 +133,6 @@ export default {
             }
         },
         page: function(val){
-            console.log(val,'✌')
             switch(val){
                 case 1:
                     this.wordList = this.wordListMonth
@@ -172,6 +170,9 @@ export default {
                 item.height = (item.num / maxWordNum) * 2.4 + 0.8
             });
         },
+        goPage(topic,title,color,per,height,num){
+            this.$router.push({path:'keyWordDetail',query:{topic,title,color,per,height,num}})
+        }
     }
 
 }

@@ -1,43 +1,40 @@
 <template>
  <div>
      <!-- 头部固定信息 -->
-     <div @click="back('/')" class="head">
     <forum-header :pageName="pageTitle" ></forum-header>
-     </div>
-    <!-- 帖子内容 -->
-    <div class="indexPage">
+    <div class="post-detail" style="margin-top: 1rem"  v-touch:left="onSwipeLeft">
+        <!-- 帖子详情 -->
+      <div :class="{'themeColor--green': themeColor == 'green', 'themeColor--pink': themeColor == 'pink','themeColor--yellow': themeColor == 'yellow','themeColor--blue': themeColor == 'blue','themeColor--purple': themeColor == 'purple'}">
+  
+          <div class="post-card">
+          <div class="postCardHeader">
+              <span>{{posDetail1.forum}}</span>
+              <span>{{posDetail1.newestDate}}</span>
+              <span>{{posDetail1.origin}}</span>  
+              <span>#{{posDetail1.floorNum}}</span>
+          </div>
+          <div class="postInfo">
+              <div>
+              <span>{{posDetail1.subtitle}}</span>
+              </div>
+              <span style="margin-right: 0;">{{posDetail1.totalNum}}</span>
+          </div>
+          <div class="postCardContent">{{posDetail1.content}}</div>
+        </div>
+        <!-- 评论内容 -->
         <ul>
-            <li v-for="(post,index) in postList1" :key="index" class="postCard">
-            <div class="postCardHeader">
-                <span :style="'color: #5e3277;'">{{post.forum}}</span>
-                <span :style="'color: #5e3277;'">{{post.newestDate}}</span>
-                <span :style="'color: #5e3277;'">{{post.origin}}</span>  
-                 <span :style="'background-color:#5e3277;position:absolute;color:white;border-radius: 0.18rem;width: 0.86rem;height: 0.38rem;text-align:center;right:0.36rem'">#{{post.floorNum}}</span>
-            </div>
-            <div class="postInfo">
-                <div>
-                <span>{{post.subtitle}}</span>
-                </div>
-                <span style="margin-right: 0;">{{post.totalNum}}</span>
+            <li v-for="(post,index) in postList2" :key="index" class="post-card">
+            <div class="postCardHeader" style = "padding-bottom:0.5rem;">
+                <span>{{post.author}}</span>
+                <span>{{post.discussDate}}</span>
+                <span>{{post.discusstime}}</span> 
+                <span>#{{post.floorNum}}</span> 
             </div>
             <div class="postCardContent">{{post.content}}</div>
             </li>
         </ul>
-    </div>
-    <!-- 评论内容 -->
-    <div class="indexPage" :style = "'margin-top:0;'">
-        <ul>
-            <li v-for="(post,index) in postList2" :key="index" class="postCard">
-            <div class="postCardHeader" :style = "'padding-bottom:0.5rem;'">
-                <span :style="'color: #5e3277;'">{{post.author}}</span>
-                <span :style="'color: #5e3277;'">{{post.discussDate}}</span>
-                <span :style="'color: #5e3277;'">{{post.discusstime}}</span> 
-                <span :style="'background-color:#5e3277;position:absolute;color:white;border-radius: 0.18rem;width: 0.86rem;height: 0.38rem;text-align:center;right:0.36rem'">#{{post.floorNum}}</span> 
-            </div>
-            <div class="postCardContent">{{post.content}}</div>
-            </li>
-        </ul>
-    </div>
+      </div>
+  </div>
  </div>
 </template>
 
@@ -49,22 +46,40 @@ export default {
     return {
       navVisible: false,
       pageTitle: '帖子详情页',
-      postList1: [
-        {type: 'modual1', forum : 's1观测站', newestDate: '2019-08-15',origin: '08:22:32',floorNum:'1',subtitle:'本帖最后由 S1观测站 于 2019-8-22 09:38 编辑',  content: '关爱社畜青年，观测食中百味排遍吃中千雷，挑选味道绝美这里是爱你们的观测站如果你有好的建议或是想看到的评测，请加入观测站粉丝群！S1-观测站品鉴委员会：144107770你在验证里填我来找观测站是没问题的！如果你一直想看某样产品，但我一直没有做，欢迎支援我一些评测材料想要投食观测站的话，请直接私信我，或在直播群私聊我，我会给你地址的附带说一句，观测站在微博也有更新~微博关注@S1观测站'},
-      ],
+      id: '',
+      themeColor: 'blue',
+      posDetail1: {
+        type: 'modual1', 
+        forum : 's1观测站',
+        newestDate: '2019-08-15',
+        origin: '08:22:32',
+        floorNum:'1',
+        subtitle:'本帖最后由 S1观测站 于 2019-8-22 09:38 编辑',
+        content: '关爱社畜青年，观测食中百味排遍吃中千雷，挑选味道绝美这里是爱你们的观测站如果你有好的建议或是想看到的评测，请加入观测站粉丝群！S1-观测站品鉴委员会：144107770你在验证里填我来找观测站是没问题的！如果你一直想看某样产品，但我一直没有做，欢迎支援我一些评测材料想要投食观测站的话，请直接私信我，或在直播群私聊我，我会给你地址的附带说一句，观测站在微博也有更新~微博关注@S1观测站'},
       postList2:[
          {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'2',content:'干，自从点开这个帖子钱包的口子堵不住了',},
          {author: 'findjya',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'3',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
          {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'4',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
          {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'5',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
          {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'6',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
+         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'7',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
+         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'8',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
+         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'9',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
       ]
     }
+  },
+  mounted(){
+    // this.id = this.$router.query.id
+    this.pageTitle = this.$route.query.origin
+    this.themeColor = this.$route.query.themeColor
   },
   methods:{
     back(path){
         this.$router.replace(path);//返回上一层
     },
+    back () {
+      this.$router.go(-1)
+    }
   },
   components:{
     forumHeader: header
@@ -77,7 +92,7 @@ export default {
 .head{
   z-index: 99999;
 }
-.indexPage{
+.post-detail{
   position: relative;
   float: left;
   padding: 0;
@@ -89,28 +104,36 @@ export default {
     width: 100%;
     list-style: none;
     li:nth-child(2n+1){
-    background: rgba(94,50,119,.03);
+      background: rgba(94,50,119,.03);
     }
     li:nth-child(2n){
-    background: rgba(94,50,119,0);
+      background: rgba(94,50,119,0);
     }
   }
   // 帖子列表   
-  .postCard{
-    border-top: 0.02rem solid #5e3277;
+  .post-card{
     padding: 0.24rem 0.4rem 0.62rem 0.36rem;
     position: relative;
     box-sizing: border-box;
     .postCardHeader{
-      display: flex;
-      justify-content: flex-start;
-      line-height: 1.5;
-      font-size: 0.24rem;
-      span{
-        color: #fff;
-        padding: 0.04rem 0.06rem;
-        font-size: 0.26rem
-      }
+        display: flex;
+        justify-content: flex-start;
+        line-height: 1.5;
+        font-size: 0.24rem;
+        span{
+          color: #fff;
+          padding: 0.04rem 0.06rem;
+          font-size: 0.26rem;
+          &:last-child{
+              position: absolute;
+              color: white;
+              border-radius: 0.18rem;
+              width: 0.86rem;
+              height: 0.38rem;
+              text-align:center;
+              right:0.36rem
+          }
+        }
     }
     .postInfo{
       display: flex;
@@ -136,6 +159,28 @@ export default {
         top: 0;
         left: 0.32rem;
      }
+  }
+    // 主题色控制
+  $themeColor: ('green', #33c9b0, #b2f0e6),
+              ('pink', #f99dce, #ffcfe9),
+              ('yellow', #fee432, #fff6b7),
+              ('blue', #6CA8C2, #fff6b7),
+              ('purple', #DD98E2, #ffecf6);
+  @each $name, $bgColor, $subColor in $themeColor{
+      .themeColor--#{$name}{
+        .post-card{
+          border-top: 0.02rem solid $bgColor;
+          .postCardHeader{
+            span{
+              color: $bgColor;
+              &:last-child{
+                background-color: $bgColor;
+                color: #FFf;
+              }
+            }
+          }
+        }
+      } 
   }
 }
 </style>

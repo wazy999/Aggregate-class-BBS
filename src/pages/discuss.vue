@@ -1,7 +1,7 @@
 <template>
   <div>
      <!-- 头部固定信息 -->
-     <div class="forum-header">
+     <div class="forum-header" style="margin-top: 1.2rem;">
     <forum-header :pageName="pageTitle" ></forum-header>
     </div>
     <!-- 图形绘制 -->
@@ -145,13 +145,13 @@ export default {
       keyword2:'压榨',
       //帖子列表
        postList1: [
-        {type: 'modual1', addNum: '60', newestDate: '5s',origin: '猫扑', author: 'Sgacra', aime: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '【V4】虚拟YouTuber(vtuber)综合交流讨论专楼[新人请阅读主楼]'},
+        {type: 'modual1', addNum: '60', newestDate: '5s',origin: '猫扑', author: 'Sgacra', time: '2019-08-22', date: '08:22:32', aotalNum: '300256', content: '【V4】虚拟YouTuber(vtuber)综合交流讨论专楼[新人请阅读主楼]'},
       ],
       postList3: [
-        { addNum: '2528', newestDate: '1h30m',origin: 'NGA  - Vtuber', author: 's1观测站', aime: '2019-07-15', date: '18:23:32', aotalNum: '300256', content: '“にじさんじ”所属Vtuber综合交流讨论贴V2'},
+        { addNum: '2528', newestDate: '1h30m',origin: 'NGA  - Vtuber', author: 's1观测站', time: '2019-07-15', date: '18:23:32', aotalNum: '300256', content: '“にじさんじ”所属Vtuber综合交流讨论贴V2'},
       ],
       postList4: [
-        {type: 'modual1', addNum: '35', newestDate: '5s',origin: '猫扑', author: 'sl', aime: '2019-08-24', date: '21:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
+        {type: 'modual1', addNum: '35', newestDate: '5s',origin: '猫扑', author: 'sl', time: '2019-08-24', date: '21:22:32', aotalNum: '300256', content: '[新番] 【冈田麿里】19.07『#荒乙／骚动时节的少女们啊。』专楼'},
       ],
        postList2:[
          {author: 'yjsp1',discussDate:'2018-08-26',discusstime:'12:28:22',floorNum:'18',content:'压榨阿……a8该被炎上了',},

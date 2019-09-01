@@ -8,13 +8,18 @@ import keyWord from '@/components/keyWord'
 import discuss from '@/pages/discuss'
 import content from '@/components/content'
 import tabbar from '@/components/tabbar'
-import sidebar from '@/components/sidebar'
+import nav from '@/components/nav'
+import keyWordDetail from '@/pages/keyWordDetail'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/index'
+    },
+    {
+      path: '/index',
       name: '首页',
       component: index
     }, {
@@ -46,9 +51,13 @@ export default new Router({
       name: '底部导航栏',
       component: tabbar
     }, {
-      path: '/sidebar',
+      path: '/nav',
       name: '侧边栏',
-      component: sidebar
+      component: nav
+    }, {
+      path: '/keyWordDetail',
+      name: '关键词详情',
+      component: keyWordDetail
     }
   ]
 })

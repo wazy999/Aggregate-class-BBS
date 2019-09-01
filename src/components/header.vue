@@ -1,7 +1,7 @@
 <template>
   <div class="project-header">
     <div class="top-foroum">
-        <img src="../assets/image/headerIcon.png"/>
+        <img src="../assets/image/headerIcon.png"  @click="openSideNav"/>
         <span class="pageName">{{pageName}}</span>
     </div>
   </div>
@@ -10,13 +10,24 @@
 <script>
 export default {
     props: ['pageName'],
+    data(){
+        return{
+            navShow: false
+        }
+    },
+    methods:{
+        openSideNav(){
+            this.navShow = !this.navShow
+            this.$emit('openNav', this.navShow)
+        }
+    }
 }
 </script>
 
 <style lang="scss">
 .project-header{
     float: left;
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     width:100%;
@@ -24,6 +35,7 @@ export default {
     padding: 0.1rem 0 0.08rem 0;
     font-size: 0.36rem;
     background: #faf9fb;
+    z-index: 999;
     .top-foroum{
         img{
             width: 0.8rem;

@@ -1,7 +1,9 @@
 <template>
-  <div class="data-page">
-    <forum-header :pageName="'数据统计'"></forum-header>
-    <div class="data-statistics">
+  <div class="data-page" >
+    <forum-header :pageName="'数据统计'" @openNav = "toggleNav"></forum-header>
+    <side-nav :navVisible = "sideNavShow" style="z-index: 999; position: fixed; top: 2rem; left: 0;"></side-nav>
+    <div class="data-statistics" style="margin-top: 1.2rem;">
+      <div class="page-mask" @click = "closeNav" :class="{'close-mask' : !sideNavShow}"></div>
       <div class="data-select">
           <span :class="{active : isSelected == 'day', brother: isSelected == 'week'}" @click="dateSelect('day')">日</span>
           <span :class="{active : isSelected == 'week', brother: isSelected == 'month'}" @click="dateSelect('week')">周</span>
@@ -15,7 +17,7 @@
         <key-word :timeType="isSelected" :page = 'page'></key-word>
       </div>
     </div>
-    <forum-tabbar></forum-tabbar>
+    <!-- <forum-tabbar></forum-tabbar> -->
   </div>
 </template>
 
@@ -24,10 +26,13 @@ import header from '@/components/header'
 import card from '@/components/card'
 import keyWord from '@/components/keyWord'
 import tabbar from '@/components/tabbar'
+import nav from '@/components/nav'
+
 export default {
   data() {
     return {
       isSelected: 'day',
+      sideNavShow: false,
       page: 0,
     }
   },
@@ -35,15 +40,21 @@ export default {
     forumHeader: header,
     forumTabbar: tabbar,
     card,
-    keyWord
+    keyWord,
+    sideNav: nav
   },
   methods: {
     dateSelect(val){
       this.isSelected = val
     },
     pageChange(data){
-      console.log(data,'222222')
       this.page = data
+    },    
+    toggleNav(data){
+      this.sideNavShow = data
+    },
+    closeNav(){
+      this.sideNavShow = false
     }
   }
 }
@@ -70,6 +81,7 @@ export default {
          display: inline-block;
          padding: 0.05rem 0.32rem;
          font-size: 0.24rem;
+         color: $themeColor;
          border-right: 0.02rem solid $themeColor;
          border-radius: 0.5rem;
          box-sizing: border-box;
@@ -104,8 +116,22 @@ export default {
      }
    }
   .key-word{
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    margin-top: 0.52rem;
+  }
+  .page-mask{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    transition: width 0.1s;
+  }
+  .close-mask{
+    width: 0;
+    transition: width 0.1s;
   }
 }
 </style>

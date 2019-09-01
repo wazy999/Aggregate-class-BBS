@@ -16,6 +16,7 @@
   "dependencies": {
     "element-ui": "^2.12.0",
     "vue": "^2.5.2",
+    "vue-directive-touch": "^1.0.28",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
