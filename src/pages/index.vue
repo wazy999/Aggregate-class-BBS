@@ -2,8 +2,6 @@
  <div>
      <!-- 头部固定信息 -->
     <forum-header :pageName="pageTitle"></forum-header>
-    <!-- 侧边栏 -->
-    <forum-sidebar></forum-sidebar>
     <!-- 页面主要内容 -->
     <div class="indexPage">
         <div class="postCard" style="padding-bottom: 0.24rem">
@@ -37,7 +35,6 @@
 <script>
 import header from '@/components/header'
 import tabbar from '@/components/tabbar'
-//import sidebar from '@/components/sidebar'
 export default {
   data () {
     return {

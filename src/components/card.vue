@@ -48,11 +48,11 @@ export default {
         return{
             dataList: [],
             dataListDay: [
-                {viewNum: 232, commandNum: 358, keyWordNum: 555, key: '关键词1'},
-                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '关键词2'},
-                {viewNum: 566, commandNum: 526, keyWordNum: 222, key: '关键词3'},
-                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '关键词4'},
-                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '关键词5'},
+                {viewNum: 232, commandNum: 358, keyWordNum: 555, key: '绊爱'},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '美食'},
+                {viewNum: 566, commandNum: 526, keyWordNum: 222, key: '旅游'},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '单反相机'},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '国漫'},
             ],
             dataListWeek: [
                 {viewNum: 200, commandNum: 358, keyWordNum: 555, key: '周关键词1'},
