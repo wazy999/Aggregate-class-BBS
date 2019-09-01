@@ -99,8 +99,8 @@ export default {
                 {topic: '关键词4', title: '6', num: 113, themeColor: 'yellow'},
                 {topic: '关键词4', title: '7', num: 222, themeColor: 'green'},
                 {topic: '关键词4', title: '8', num: 23, themeColor: 'pink'},
-                {topic: '关键词4', title: '9', num: 113, themeColor: 'yellow'},            
-            ],
+                {topic: '关键词4', title: '9', num: 113, themeColor: 'yellow'},                         
+            ],           
             totalWord: 0,
         }
     },
