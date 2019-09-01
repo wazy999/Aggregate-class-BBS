@@ -1,7 +1,7 @@
 <template>
  <div>
      <!-- 头部固定信息 -->
-    <forum-header :pageName="pageTitle" @openNav = "toggleNav"></forum-header>
+    <forum-header :pageName="pageTitle" @openNav = "toggleNav" :iconType="'navShow'"></forum-header>
     <!-- 侧边栏 -->
     <side-nav :navVisible = "sideNavShow" style="z-index: 999; position: fixed; top: 2rem; left: 0;"></side-nav>
     <!-- 页面主要内容 -->

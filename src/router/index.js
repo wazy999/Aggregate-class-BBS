@@ -10,6 +10,7 @@ import content from '@/components/content'
 import tabbar from '@/components/tabbar'
 import nav from '@/components/nav'
 import keyWordDetail from '@/pages/keyWordDetail'
+import singleForum from '@/pages/singleForum'
 Vue.use(Router)
 
 export default new Router({
@@ -58,6 +59,10 @@ export default new Router({
       path: '/keyWordDetail',
       name: '关键词详情',
       component: keyWordDetail
+    }, {
+      path: '/singleForum',
+      name: '某论坛',
+      component: singleForum
     }
   ]
 })

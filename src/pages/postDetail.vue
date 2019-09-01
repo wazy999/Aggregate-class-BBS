@@ -1,34 +1,34 @@
 <template>
  <div>
      <!-- 头部固定信息 -->
-    <forum-header :pageName="pageTitle" ></forum-header>
-    <div class="post-detail" style="margin-top: 1rem"  v-touch:left="onSwipeLeft">
+    <forum-header :pageName="pageTitle" :iconType="'backShow'"></forum-header>
+    <div class="post-detail" style="margin-top: 1rem">
         <!-- 帖子详情 -->
       <div :class="{'themeColor--green': themeColor == 'green', 'themeColor--pink': themeColor == 'pink','themeColor--yellow': themeColor == 'yellow','themeColor--blue': themeColor == 'blue','themeColor--purple': themeColor == 'purple'}">
   
           <div class="post-card">
           <div class="postCardHeader">
-              <span>{{posDetail1.forum}}</span>
-              <span>{{posDetail1.newestDate}}</span>
-              <span>{{posDetail1.origin}}</span>  
-              <span>#{{posDetail1.floorNum}}</span>
+              <span>{{postMaster.forum}}</span>
+              <span>{{postMaster.date}}</span>
+              <span>{{postMaster.time}}</span>  
+              <span>#1</span>
           </div>
           <div class="postInfo">
               <div>
-              <span>{{posDetail1.subtitle}}</span>
+              <span>本帖最后由 {{postMaster.author}} 于 {{postMaster.date +' '+ postMaster.time}} 编辑</span>
               </div>
-              <span style="margin-right: 0;">{{posDetail1.totalNum}}</span>
+              <span style="margin-right: 0;">{{postMaster.totalNum}}</span>
           </div>
-          <div class="postCardContent">{{posDetail1.content}}</div>
+          <div class="postCardContent">{{postMaster.content}}</div>
         </div>
         <!-- 评论内容 -->
         <ul>
             <li v-for="(post,index) in postList2" :key="index" class="post-card">
             <div class="postCardHeader" style = "padding-bottom:0.5rem;">
                 <span>{{post.author}}</span>
-                <span>{{post.discussDate}}</span>
-                <span>{{post.discusstime}}</span> 
-                <span>#{{post.floorNum}}</span> 
+                <span>{{post.date}}</span>
+                <span>{{post.time}}</span> 
+                <span>#{{index+2}}</span> 
             </div>
             <div class="postCardContent">{{post.content}}</div>
             </li>
@@ -40,6 +40,7 @@
 
 <script>
 import header from '@/components/header'
+import api from '../request.js'
 
 export default {
   data () {
@@ -48,30 +49,15 @@ export default {
       pageTitle: '帖子详情页',
       id: '',
       themeColor: 'blue',
-      posDetail1: {
-        type: 'modual1', 
-        forum : 's1观测站',
-        newestDate: '2019-08-15',
-        origin: '08:22:32',
-        floorNum:'1',
-        subtitle:'本帖最后由 S1观测站 于 2019-8-22 09:38 编辑',
-        content: '关爱社畜青年，观测食中百味排遍吃中千雷，挑选味道绝美这里是爱你们的观测站如果你有好的建议或是想看到的评测，请加入观测站粉丝群！S1-观测站品鉴委员会：144107770你在验证里填我来找观测站是没问题的！如果你一直想看某样产品，但我一直没有做，欢迎支援我一些评测材料想要投食观测站的话，请直接私信我，或在直播群私聊我，我会给你地址的附带说一句，观测站在微博也有更新~微博关注@S1观测站'},
-      postList2:[
-         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'2',content:'干，自从点开这个帖子钱包的口子堵不住了',},
-         {author: 'findjya',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'3',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
-         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'4',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
-         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'5',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
-         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'6',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
-         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'7',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
-         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'8',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
-         {author: 'yjsp114514',discussDate:'2018-08-02',discusstime:'12:26:22',floorNum:'9',content:'买了上个帖子有券的米酒，冰镇后比较好喝，几乎没有度数，当饮料喝了。一看配料有砂糖心塞',},
-      ]
+      postMaster: {},
+      postList2:[]
     }
   },
   mounted(){
     // this.id = this.$router.query.id
     this.pageTitle = this.$route.query.origin
     this.themeColor = this.$route.query.themeColor
+    this.getData()
   },
   methods:{
     back(path){
@@ -79,6 +65,13 @@ export default {
     },
     back () {
       this.$router.go(-1)
+    },
+    getData(){
+        api.getData('/news/index').then( res=>{
+            console.log(res)
+            this.postList2 = res.postCommand
+            this.postMaster = res.floorMaster
+        })
     }
   },
   components:{

@@ -1,6 +1,6 @@
 <template>
   <div class="data-page" >
-    <forum-header :pageName="'数据统计'" @openNav = "toggleNav"></forum-header>
+    <forum-header :pageName="'数据统计'" @openNav = "toggleNav" :iconType="'navShow'"></forum-header>
     <side-nav :navVisible = "sideNavShow" style="z-index: 999; position: fixed; top: 2rem; left: 0;"></side-nav>
     <div class="data-statistics" style="margin-top: 1.2rem;">
       <div class="page-mask" @click = "closeNav" :class="{'close-mask' : !sideNavShow}"></div>

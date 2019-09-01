@@ -1,6 +1,6 @@
 <template>
     <div>
-        <forum-header :pageName="keyWordInfo.title" ></forum-header>
+        <forum-header :pageName="keyWordInfo.title" :iconType="'backShow'"></forum-header>
         <div class="keyWord-detail" style="margin-top: 1rem;">
             <div :class="{'themeColor--green': keyWordInfo.color == 'green', 'themeColor--pink': keyWordInfo.color == 'pink','themeColor--yellow': keyWordInfo.color == 'yellow','themeColor--blue': keyWordInfo.color == 'blue','themeColor--purple': keyWordInfo.color == 'purple'}">
                 <!-- 顶部信息 -->

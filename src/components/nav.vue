@@ -55,10 +55,10 @@
                 <div class="block-option" :class="{'blockShow': !blockVisible}">
                     <div class="block-item">
                         <span class="option-span" @click="goPage('index')">时间线</span>
-                        <span class="option-span" style="background: #fef8d3;">论坛1</span>
-                        <span class="option-span" style="background: #ffecf6;">论坛2</span>
-                        <span class="option-span" style="background: #c1efe7;">论坛3</span>
-                        <span class="option-span" style="background: #bde0f0;">论坛4</span>
+                        <span class="option-span" style="background: #fef8d3;" @click="goPage('singleForum', '百度贴吧', 'yellow')">百度贴吧</span>
+                        <span class="option-span" style="background: #ffecf6;" @click="goPage('singleForum', '猫扑', 'pink')">猫扑</span>
+                        <span class="option-span" style="background: #c1efe7;" @click="goPage('singleForum', 'STAGE1-动漫', 'green')">STAGE1-动漫</span>
+                        <span class="option-span" style="background: #bde0f0;" @click="goPage('singleForum', '知乎', 'blue')">知乎</span>
                     </div>
                 </div>
             </div>
@@ -93,8 +93,8 @@ export default {
             }
             this.selectItem = val
         },
-        goPage(val){
-           this.$router.push({path: val})
+        goPage(val,forumName,forumColor){
+           this.$router.push({path: val, query:{forumName,forumColor}})
         }
     }
 }
