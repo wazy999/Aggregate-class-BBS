@@ -48,11 +48,11 @@ export default {
         return{
             dataList: [],
             dataListDay: [
-                {viewNum: 232, commandNum: 358, keyWordNum: 555, key: '职人'},
+                {viewNum: 232, commandNum: 358, keyWordNum: 555, key: '旅游'},
                 {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '美食'},
                 {viewNum: 566, commandNum: 526, keyWordNum: 222, key: '旅游'},
-                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '单反相机'},
                 {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '国漫'},
+                {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '美食'},
             ],
             dataListWeek: [
                 {viewNum: 200, commandNum: 358, keyWordNum: 555, key: '美食'},
@@ -64,14 +64,14 @@ export default {
             dataListMonth: [
                 {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '考研'},
                 {viewNum: 33, commandNum: 358, keyWordNum: 555, key: '工业化'},
-                {viewNum: 22, commandNum: 358, keyWordNum: 555, key: '认识颠覆'},
+                {viewNum: 22, commandNum: 358, keyWordNum: 555, key: '国漫'},
                 {viewNum: 100, commandNum: 358, keyWordNum: 56, key: '高音'},
                 {viewNum: 100, commandNum: 358, keyWordNum: 555, key: '奶茶'},
             ],
             dataListYear: [
                 {viewNum: 200, commandNum: 358, keyWordNum: 555, key: '配音'},
                 {viewNum: 358, commandNum: 358, keyWordNum: 555, key: '饮食'},
-                {viewNum: 33, commandNum: 26, keyWordNum: 555, key: '小程序'},
+                {viewNum: 33, commandNum: 26, keyWordNum: 555, key: '美食'},
                 {viewNum: 200, commandNum: 358, keyWordNum: 36, key: '诗选'},
                 {viewNum: 200, commandNum: 358, keyWordNum: 555, key: '创赢'},
             ],
